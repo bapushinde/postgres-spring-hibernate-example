@@ -1,2 +1,2 @@
-# postgres-spring-hibernate-example
+# postgre-spring-hibernate-example
 Spring+Hibernate+Postgresql example
