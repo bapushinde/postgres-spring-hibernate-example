@@ -28,8 +28,12 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public List<String> getByName(String name) {
-    return userDao.getByName(name);
+  public List<String> getUsersByESP(String name) {
+    return userDao.getUsersByESP(name);
   }
 
+  @Override
+  public List<String> getAdults() {
+    return userDao.getAdults();
+  }
 }

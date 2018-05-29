@@ -24,10 +24,10 @@ public class Main {
     UserService userService = context.getBean(UserService.class);
 
     // Adding user with userInfo as JSON
-    userService.add(new User(new UserInfo("test1", "john", "john@example.com")));
-    userService.add(new User(new UserInfo("test2", "sean", "sean@example.com")));
-    userService.add(new User(new UserInfo("test3", "gill", "gill@example.com")));
-    userService.add(new User(new UserInfo("test4", "Smith", "Smith@example.com")));
+    userService.add(new User(new UserInfo("test1", "john", "john@example.com", 18)));
+    userService.add(new User(new UserInfo("test2", "sean", "sean@example.com", 25)));
+    userService.add(new User(new UserInfo("test3", "gill", "gill@gmail.com", 15)));
+    userService.add(new User(new UserInfo("test4", "Smith", "smith@gmail.com", 16)));
 
     // Get UserInfo
     List<User> users = userService.listUsers();
@@ -37,7 +37,16 @@ public class Main {
           user.getUserInfo().getEmail());
     }
 
-    List<String> result = userService.getByName(users.get(0).getUserInfo().getFirstName());
+    List<String> result = userService.getUsersByESP("gmail.com");
+    // LOG.info("User by first Name : {} : {} ",users.get(0).getUserInfo().getFirstName() , result);
+
+    for (String json : result) {
+      ObjectMapper objectMapper = new ObjectMapper();
+      UserInfo userInfo = objectMapper.readValue(json, UserInfo.class);
+      LOG.info("{}", userInfo);
+    }
+
+    result = userService.getAdults();
     // LOG.info("User by first Name : {} : {} ",users.get(0).getUserInfo().getFirstName() , result);
 
     for (String json : result) {

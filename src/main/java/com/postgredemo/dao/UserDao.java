@@ -9,5 +9,7 @@ public interface UserDao {
 
   List<User> listUsers();
 
-  List<String> getByName(String name);
+  List<String> getUsersByESP(String name);
+
+  List<String> getAdults();
 }

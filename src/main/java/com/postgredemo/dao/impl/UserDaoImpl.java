@@ -32,15 +32,26 @@ public class UserDaoImpl implements UserDao {
   }
 
   @Override
-  public List<String> getByName(String name) {
+  public List<String> getUsersByESP(String name) {
     @SuppressWarnings("unchecked")
     String query = "select jsonb_pretty(u.userinfo) " +
         " from users u " +
-        " where u.userinfo ->> 'firstName' like '" + name + "'";
+        " where u.userinfo ->> 'email' like '%" + name + "'";
     Session session = sessionFactory.openSession();
     List<String> resultlist = session.createNativeQuery(query).getResultList();
     session.close();
-    return resultlist ;
+    return resultlist;
   }
 
+  @Override
+  public List<String> getAdults() {
+    @SuppressWarnings("unchecked")
+    String query = "select jsonb_pretty(u.userinfo) " +
+        " from users u " +
+        " where u.userinfo ->> 'age' >= '18' ";
+    Session session = sessionFactory.openSession();
+    List<String> resultlist = session.createNativeQuery(query).getResultList();
+    session.close();
+    return resultlist;
+  }
 }
